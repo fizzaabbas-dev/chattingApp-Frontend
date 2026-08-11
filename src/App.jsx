@@ -22,7 +22,7 @@ function App() {
     });
 
     socket.on("disconnect", () => {
-      console.log("Disconnected from server");
+      console.log("Disconnected from server ");
     });
 
     return () => {
