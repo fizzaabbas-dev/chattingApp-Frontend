@@ -21,6 +21,6 @@ body, html, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Soft, clean modern grey-blue gradient */
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  /* Soft and professional light purple / lilac gradient */
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #ddd6fe 100%);
 }
