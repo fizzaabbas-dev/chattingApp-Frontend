@@ -1,65 +1,26 @@
 :root {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color-scheme: light;
-  color: #1e293b;
-  background-color: #f1f5f9;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html, body, #root {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*, *::before, *::after {
   box-sizing: inherit;
 }
 
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
 #root {
-  min-height: 100vh;
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Fresh & Professional Sky-Blue Light Gradient */
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #f0fdf4 100%);
-}
-
-a {
-  font-weight: 500;
-  color: #0284c7;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #0369a1;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-/* Custom Scrollbar Styling for Chatbox */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  /* Soft, clean modern grey-blue gradient */
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
 }
