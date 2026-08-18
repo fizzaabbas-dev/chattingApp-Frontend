@@ -3,14 +3,13 @@ import ChatRoom from "./components/ChatRoom";
 import "./App.css";
 import { io } from "socket.io-client";
 
-const SOCKET_URL = " http://localhost:5173/";
+const SOCKET_URL = "https://backend-chattingapp-production.up.railway.app";
 
 let socket;
 
 function App() {
   const [joined, setJoined] = useState(false);
 
-  // User Form Fields
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
 
@@ -18,7 +17,7 @@ function App() {
     socket = io(SOCKET_URL);
 
     socket.on("connect", () => {
-      console.log("Connected to server");
+      console.log("Connected to Railway server:", socket.id);
     });
 
     socket.on("disconnect", () => {
@@ -31,6 +30,10 @@ function App() {
   }, []);
 
   const handleLeave = () => {
+    if (socket && room) {
+      socket.emit("leave", room);
+    }
+
     setUsername("");
     setRoom("");
     setJoined(false);
@@ -38,16 +41,20 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (socket) {
+
+    if (socket && room) {
       socket.emit("join", room);
     }
+
     setJoined(true);
   };
+
   return (
     <>
-      {joined == false ? (
+      {joined === false ? (
         <div className="join-group-container">
           <h2 style={{ color: "black" }}>Join a Chat Group</h2>
+
           <form className="join-group-form" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -56,6 +63,7 @@ function App() {
               onChange={(e) => setUsername(e.target.value)}
               required
             />
+
             <input
               type="text"
               placeholder="Group Name"
@@ -63,6 +71,7 @@ function App() {
               onChange={(e) => setRoom(e.target.value)}
               required
             />
+
             <button type="submit">Join</button>
           </form>
         </div>
