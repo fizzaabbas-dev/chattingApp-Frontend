@@ -45,3 +45,21 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+/* Custom Scrollbar Styling for Chatbox */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
