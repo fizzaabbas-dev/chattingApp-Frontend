@@ -3,7 +3,7 @@ import ChatRoom from "./components/ChatRoom";
 import "./App.css";
 import { io } from "socket.io-client";
 
-const SOCKET_URL = "http://backend-chattingapp-production.up.railway.app";
+const SOCKET_URL = "https://backend-chattingapp-production.up.railway.app";
 
 let socket;
 
@@ -22,7 +22,7 @@ function App() {
     });
 
     socket.on("disconnect", () => {
-      console.log("Disconnected from server ");
+      console.log("Disconnected from server");
     });
 
     return () => {
