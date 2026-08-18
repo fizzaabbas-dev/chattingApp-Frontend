@@ -18,10 +18,9 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
   const handleSend = (e) => {
     e.preventDefault();
     if (message.trim()) {
+   
       socket.emit("send", { text: message, room: room, username: username });
-      setMessages((prev) => [...prev, { text: message, room, username }]);
-
-      setMessage("");
+      setMessage(""); 
     }
   };
 
