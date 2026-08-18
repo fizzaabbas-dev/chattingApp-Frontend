@@ -7,9 +7,12 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
   useEffect(() => {
     if (!socket) return;
 
+    // Listen for incoming messages from the server
     socket.on("message", (msg) => {
       setMessages((prev) => [...prev, msg]);
     });
+
+    // Cleanup the listener on component unmount
     return () => {
       socket.off("message");
     };
@@ -18,18 +21,23 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
   const handleSend = (e) => {
     e.preventDefault();
     if (message.trim()) {
+      // Emit the message to the server; do NOT add to local state manually
       socket.emit("send", { text: message, room: room, username: username });
-      setMessages((prev) => [...prev, { text: message, room, username }]);
-
       setMessage("");
     }
+  };
+
+  const handleLeaveRoom = () => {
+    // Notify the server about leaving the room
+    socket.emit("leave", room);
+    onLeave();
   };
 
   return (
     <div className="chatroom-container">
       <div className="chatroom-header">
         <h2>Room: {room}</h2>
-        <button className="leave-btn" onClick={onLeave}>
+        <button className="leave-btn" onClick={handleLeaveRoom}>
           Leave
         </button>
       </div>
