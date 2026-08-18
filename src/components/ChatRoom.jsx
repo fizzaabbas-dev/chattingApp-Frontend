@@ -3,16 +3,21 @@ import { useEffect, useState } from "react";
 const ChatRoom = ({ username, room, socket, onLeave }) => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  // Track active users inside the room, starting with the current user
+  // Track all active users in the room
   const [activeUsers, setActiveUsers] = useState(new Set([username]));
 
-  // Listen for incoming messages and extract active users automatically
+  // Listen for incoming messages and track active participants
   useEffect(() => {
     if (!socket) return;
 
+    // Announce presence when joining the room
+    socket.emit("send", { text: `${username} has joined the chat.`, room: room, username: "System" });
+
     socket.on("message", (msg) => {
       setMessages((prev) => [...prev, msg]);
-      if (msg.username) {
+      
+      // Add user to active users list if it's a regular user message
+      if (msg.username && msg.username !== "System") {
         setActiveUsers((prev) => new Set(prev).add(msg.username));
       }
     });
@@ -20,7 +25,7 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
     return () => {
       socket.off("message");
     };
-  }, [socket, username]);
+  }, [socket, room, username]);
 
   // Handle sending a new message
   const handleSend = (e) => {
@@ -46,7 +51,7 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
         </button>
       </div>
 
-      {/* Active Users Bar (WhatsApp Group Info style) */}
+      {/* Online Users Bar (WhatsApp Group Info style) */}
       <div style={{ padding: "8px 15px", background: "#f8f9fa", borderBottom: "1px solid #eee", fontSize: "13px", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
         <span style={{ fontWeight: "600", color: "#555" }}>Online:</span>
         {Array.from(activeUsers).map((user, idx) => (
