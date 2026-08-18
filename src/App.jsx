@@ -4,7 +4,7 @@ import "./App.css";
 import { io } from "socket.io-client";
 
 // Define the Socket URL without leading spaces
-const SOCKET_URL = "http://backend-chattingapp-production.up.railway.app";
+const SOCKET_URL = "https://backend-chattingapp-production.up.railway.app";
 
 let socket;
 
