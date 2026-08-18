@@ -5,7 +5,7 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
   const [messages, setMessages] = useState([]);
   const [activeUsers, setActiveUsers] = useState(new Set([username]));
 
-  // Listen for incoming messages and track active users
+  // Listen for incoming messages and track active participants
   useEffect(() => {
     if (!socket) return;
 
@@ -35,9 +35,9 @@ const ChatRoom = ({ username, room, socket, onLeave }) => {
       <div className="chatroom-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <h2>Room: {room}</h2>
-          {/* WhatsApp style active participants indicator */}
+          {/* WhatsApp style online count and active users list */}
           <small style={{ color: "gray", fontSize: "12px" }}>
-            🟢 Active in session: {Array.from(activeUsers).join(", ")}
+            🟢 {activeUsers.size} online: {Array.from(activeUsers).join(", ")}
           </small>
         </div>
         <button className="leave-btn" onClick={onLeave}>
